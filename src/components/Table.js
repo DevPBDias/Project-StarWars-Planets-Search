@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/Context';
 
 function Table() {
-  const { data } = useContext(StarWarsContext);
+  const { planetsFilter } = useContext(StarWarsContext);
+  // só faz MAP com o estado dos planetas filtrados e atualizados a cada momento q digito
 
   return (
     <table className="tableInfo">
@@ -24,7 +25,7 @@ function Table() {
         </tr>
       </thead>
       {
-        data.map((info) => (
+        planetsFilter.map((info) => (
           <tbody key={ info.name }>
             <tr>
               <td>{ info.name }</td>

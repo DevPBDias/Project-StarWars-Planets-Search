@@ -6,6 +6,8 @@ const STAR_WARS_API = 'https://swapi-trybe.herokuapp.com/api/planets/';
 
 function StarWarsProvider({ children }) {
   const [data, setData] = useState([]);
+  // criando um estado para salvar/atualizar os planetas filtrados ao longo que digito no input
+  const [planetsFilter, setPlanetsFilter] = useState([]);
 
   const apiStarWars = async () => {
     try {
@@ -19,6 +21,8 @@ function StarWarsProvider({ children }) {
         return null;
       });
       setData(dataInfoDeleted);
+      // setando o estado inicial abaixo igual ao data, antes de ser feito o filtro
+      setPlanetsFilter(dataInfoDeleted);
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +33,7 @@ function StarWarsProvider({ children }) {
     apiStarWars();
   }, []);
 
-  const contextValue = { data };
+  const contextValue = { data, planetsFilter, setPlanetsFilter };
 
   return (
     <StarWarsContext.Provider value={ contextValue }>
