@@ -33,7 +33,9 @@ function StarWarsProvider({ children }) {
     apiStarWars();
   }, []);
 
-  const contextValue = { data, planetsFilter, setPlanetsFilter };
+  const contextValue = { data,
+    planetsFilter,
+    setPlanetsFilter };
 
   return (
     <StarWarsContext.Provider value={ contextValue }>

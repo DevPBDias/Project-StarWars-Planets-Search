@@ -35,7 +35,6 @@ function Header() {
           onChange={ handleChange }
         />
       </label>
-
     </div>
   );
 }
