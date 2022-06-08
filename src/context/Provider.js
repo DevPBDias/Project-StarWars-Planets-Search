@@ -8,6 +8,13 @@ function StarWarsProvider({ children }) {
   const [data, setData] = useState([]);
   // criando um estado para salvar/atualizar os planetas filtrados ao longo que digito no input
   const [planetsFilter, setPlanetsFilter] = useState([]);
+  const [filterByNumericValues, setfilterByNumericValues] = useState(
+    {
+      column: 'population',
+      comparison: 'maior que',
+      value: '0',
+    },
+  );
 
   const apiStarWars = async () => {
     try {
@@ -35,7 +42,9 @@ function StarWarsProvider({ children }) {
 
   const contextValue = { data,
     planetsFilter,
-    setPlanetsFilter };
+    setPlanetsFilter,
+    filterByNumericValues,
+    setfilterByNumericValues };
 
   return (
     <StarWarsContext.Provider value={ contextValue }>

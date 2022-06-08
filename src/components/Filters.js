@@ -1,15 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import StarWarsContext from '../context/Context';
 
 function Filters() {
-  const { data, setPlanetsFilter } = useContext(StarWarsContext);
-  const [filterByNumericValues, setfilterByNumericValues] = useState(
-    {
-      column: 'population',
-      comparison: 'maior que',
-      value: '0',
-    },
-  );
+  const { setPlanetsFilter, planetsFilter,
+    filterByNumericValues, setfilterByNumericValues } = useContext(StarWarsContext);
+  // const [savePlanetFilter, setSavePlanetFilter] = useState([]);
+  const [msgFilter, setMsgFilter] = useState([]);
 
   const handleNumeric = ({ target }) => {
     setfilterByNumericValues({
@@ -22,24 +18,31 @@ function Filters() {
     const columnFilter = filterByNumericValues.column;
     const valueFilter = filterByNumericValues.value;
     const comparisonFilter = filterByNumericValues.comparison;
+
     if (comparisonFilter === 'maior que') {
-      const newPlanetsFilter = data
+      const newPlanetsFilter = planetsFilter
         .filter((values) => Number(values[columnFilter]) > Number([valueFilter]));
       setPlanetsFilter(newPlanetsFilter);
+      setMsgFilter({ ...msgFilter, filterByNumericValues });
     }
 
     if (comparisonFilter === 'menor que') {
-      const newPlanetsFilter = data
+      const newPlanetsFilter = planetsFilter
         .filter((values) => Number(values[columnFilter]) < Number([valueFilter]));
       setPlanetsFilter(newPlanetsFilter);
+      setMsgFilter({ ...msgFilter, filterByNumericValues });
     }
 
     if (comparisonFilter === 'igual a') {
-      const newPlanetsFilter = data
+      const newPlanetsFilter = planetsFilter
         .filter((values) => Number(values[columnFilter]) === Number([valueFilter]));
       setPlanetsFilter(newPlanetsFilter);
+      setMsgFilter({ ...msgFilter, filterByNumericValues });
     }
+    console.log(msgFilter);
   };
+
+  // toda vez que clickar fazer um filtro do antigo planetsFilter e acrescentar os valores do filtro no <p>
 
   return (
     <div>
@@ -90,6 +93,7 @@ function Filters() {
       >
         Filtrar
       </button>
+      {/* <p>{msgFilter}</p> */}
     </div>
   );
 }
