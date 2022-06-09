@@ -7,6 +7,11 @@ const STAR_WARS_API = 'https://swapi-trybe.herokuapp.com/api/planets/';
 function StarWarsProvider({ children }) {
   const [data, setData] = useState([]);
   const [planetsFilter, setPlanetsFilter] = useState([]);
+  const [filterPlanetName, setfilterPlanetName] = useState({
+    filterByName: {
+      name: '',
+    },
+  });
   const [filterByNumericValues, setfilterByNumericValues] = useState(
     {
       column: 'population',
@@ -27,6 +32,7 @@ function StarWarsProvider({ children }) {
         return null;
       });
       setData(dataInfoDeleted);
+      // setando o estado inicial abaixo igual ao data, antes de ser feito o filtro
       setPlanetsFilter(dataInfoDeleted);
     } catch (error) {
       console.log(error);
@@ -41,6 +47,8 @@ function StarWarsProvider({ children }) {
   const contextValue = { data,
     planetsFilter,
     setPlanetsFilter,
+    filterPlanetName,
+    setfilterPlanetName,
     filterByNumericValues,
     setfilterByNumericValues };
 

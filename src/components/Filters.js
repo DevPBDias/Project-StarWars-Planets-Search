@@ -1,50 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import StarWarsContext from '../context/Context';
 
-const OPTIONS_COLUMN = ['population',
-  'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
-const OPTIONS_OPERATOR = ['maior que', 'menor que', 'igual a'];
-
 function Filters() {
-  const { setPlanetsFilter, planetsFilter, data,
+  const { setPlanetsFilter, planetsFilter,
     filterByNumericValues, setfilterByNumericValues } = useContext(StarWarsContext);
+  // const [savePlanetFilter, setSavePlanetFilter] = useState([]);
+  const [msgFilter, setMsgFilter] = useState([]);
 
   const handleNumeric = ({ target }) => {
     setfilterByNumericValues({
       ...filterByNumericValues,
       [target.name]: target.value,
-    });
-  };
-
-  const removeColumnOptions = () => {
-    const columnFilter = filterByNumericValues.column;
-    if (columnFilter === 'population') {
-      delete OPTIONS_COLUMN[0];
-      setfilterByNumericValues({ ...filterByNumericValues, column: 'orbital_period' });
-    }
-    if (columnFilter === 'orbital_period') {
-      delete OPTIONS_COLUMN[1];
-      setfilterByNumericValues({ ...filterByNumericValues, column: 'diameter' });
-    }
-    if (columnFilter === 'diameter') {
-      delete OPTIONS_COLUMN[2];
-      setfilterByNumericValues({ ...filterByNumericValues });
-    }
-    if (columnFilter === 'rotation_period') {
-      delete OPTIONS_COLUMN[3];
-      setfilterByNumericValues({ ...filterByNumericValues });
-    }
-    if (columnFilter === 'surface_water') {
-      delete OPTIONS_COLUMN[4];
-      setfilterByNumericValues({ ...filterByNumericValues });
-    }
-  };
-
-  const resetFilter = () => {
-    setPlanetsFilter(data);
-    setfilterByNumericValues({
-      ...filterByNumericValues,
-      value: '0',
     });
   };
 
@@ -57,21 +23,26 @@ function Filters() {
       const newPlanetsFilter = planetsFilter
         .filter((values) => Number(values[columnFilter]) > Number([valueFilter]));
       setPlanetsFilter(newPlanetsFilter);
+      setMsgFilter({ ...msgFilter, filterByNumericValues });
     }
 
     if (comparisonFilter === 'menor que') {
       const newPlanetsFilter = planetsFilter
         .filter((values) => Number(values[columnFilter]) < Number([valueFilter]));
       setPlanetsFilter(newPlanetsFilter);
+      setMsgFilter({ ...msgFilter, filterByNumericValues });
     }
 
     if (comparisonFilter === 'igual a') {
       const newPlanetsFilter = planetsFilter
         .filter((values) => Number(values[columnFilter]) === Number([valueFilter]));
       setPlanetsFilter(newPlanetsFilter);
+      setMsgFilter({ ...msgFilter, filterByNumericValues });
     }
-    removeColumnOptions();
+    console.log(msgFilter);
   };
+
+  // toda vez que clickar fazer um filtro do antigo planetsFilter e acrescentar os valores do filtro no <p>
 
   return (
     <div>
@@ -83,10 +54,11 @@ function Filters() {
           id="column-filter"
           data-testid="column-filter"
         >
-          {
-            OPTIONS_COLUMN.map((column) => (
-              <option key={ column } value={ column }>{column}</option>))
-          }
+          <option defaultValue value="population">population</option>
+          <option value="orbital_period">orbital_period</option>
+          <option value="diameter">diameter</option>
+          <option value="rotation_period">rotation_period</option>
+          <option value="surface_water">surface_water</option>
         </select>
       </label>
       <label htmlFor="comparison-filter">
@@ -97,10 +69,9 @@ function Filters() {
           id="comparison-filter"
           data-testid="comparison-filter"
         >
-          {
-            OPTIONS_OPERATOR.map((operator) => (
-              <option key={ operator } value={ operator }>{operator}</option>))
-          }
+          <option defaultValue value="maior que">maior que</option>
+          <option value="menor que">menor que</option>
+          <option value="igual a">igual a</option>
         </select>
       </label>
       <label htmlFor="button-filter">
@@ -122,12 +93,7 @@ function Filters() {
       >
         Filtrar
       </button>
-      <button
-        type="button"
-        onClick={ resetFilter }
-      >
-        Resetar filtro
-      </button>
+      {/* <p>{msgFilter}</p> */}
     </div>
   );
 }

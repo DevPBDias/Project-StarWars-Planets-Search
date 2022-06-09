@@ -1,21 +1,25 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import StarWarsContext from '../context/Context';
 
 function Header() {
-  const { data, setPlanetsFilter } = useContext(StarWarsContext);
-  const [filterByName, setFilterByName] = useState({
-    name: '',
-  });
+  const { data, setPlanetsFilter,
+    filterPlanetName, setfilterPlanetName } = useContext(StarWarsContext);
 
   const handleChange = ({ target }) => {
-    setFilterByName({ name: target.value });
+    setfilterPlanetName({
+      filterByName: {
+        name: target.value,
+      },
+    });
   };
 
   // didMountUpdate: estou criando um filtro dinamico em que ao digitar ele muda o estado do planetas filtrados, anteriormente setado igual ao data
   useEffect(() => {
-    const planets = data.filter((planet) => planet.name.includes(filterByName.name));
+    const planets = data
+      .filter((planet) => planet.name
+        .toLowerCase().includes(filterPlanetName.filterByName.name));
     setPlanetsFilter(planets);
-  }, [setPlanetsFilter, filterByName.name, data]);
+  }, [setPlanetsFilter, data, filterPlanetName]);
 
   return (
     <div>
@@ -28,7 +32,7 @@ function Header() {
           placeholder="Type the planet name"
           name="planet-input"
           id="planet-input"
-          value={ filterByName.name }
+          value={ filterPlanetName.filterByName.name }
           onChange={ handleChange }
         />
       </label>
