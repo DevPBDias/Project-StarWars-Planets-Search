@@ -4,7 +4,6 @@ import StarWarsContext from '../context/Context';
 function Table() {
   const { planetsFilter } = useContext(StarWarsContext);
   console.log(planetsFilter);
-  // só faz MAP com o estado dos planetas filtrados e atualizados a cada momento q digito.
 
   return (
     <table className="tableInfo">

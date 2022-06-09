@@ -7,16 +7,13 @@ function Header() {
     name: '',
   });
 
-  // função para atualizar o valor do input
   const handleChange = ({ target }) => {
     setFilterByName({ name: target.value });
   };
 
   // didMountUpdate: estou criando um filtro dinamico em que ao digitar ele muda o estado do planetas filtrados, anteriormente setado igual ao data
   useEffect(() => {
-    // filtrando os planeta que incluem o valor q digito no input
     const planets = data.filter((planet) => planet.name.includes(filterByName.name));
-    // atualizando o estado apos a filtragem de forma dinamica
     setPlanetsFilter(planets);
   }, [setPlanetsFilter, filterByName.name, data]);
 
