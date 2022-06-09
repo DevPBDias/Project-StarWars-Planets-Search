@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import StarWarsContext from '../context/Context';
 
 const OPTIONS_COLUMN = ['population',
@@ -8,7 +8,6 @@ const OPTIONS_OPERATOR = ['maior que', 'menor que', 'igual a'];
 function Filters() {
   const { setPlanetsFilter, planetsFilter, data,
     filterByNumericValues, setfilterByNumericValues } = useContext(StarWarsContext);
-  const [msgFilter, setMsgFilter] = useState([]);
 
   const handleNumeric = ({ target }) => {
     setfilterByNumericValues({
@@ -17,38 +16,36 @@ function Filters() {
     });
   };
 
-  const removeColumn = () => {
-    console.log(filterByNumericValues);
+  const removeColumnOptions = () => {
     const columnFilter = filterByNumericValues.column;
     if (columnFilter === 'population') {
       delete OPTIONS_COLUMN[0];
       setfilterByNumericValues({ ...filterByNumericValues, column: 'orbital_period' });
-      console.log(OPTIONS_COLUMN);
     }
     if (columnFilter === 'orbital_period') {
       delete OPTIONS_COLUMN[1];
       setfilterByNumericValues({ ...filterByNumericValues, column: 'diameter' });
-      console.log(OPTIONS_COLUMN);
     }
     if (columnFilter === 'diameter') {
       delete OPTIONS_COLUMN[2];
       setfilterByNumericValues({ ...filterByNumericValues });
-      console.log(OPTIONS_COLUMN);
     }
     if (columnFilter === 'rotation_period') {
       delete OPTIONS_COLUMN[3];
       setfilterByNumericValues({ ...filterByNumericValues });
-      console.log(OPTIONS_COLUMN);
     }
     if (columnFilter === 'surface_water') {
       delete OPTIONS_COLUMN[4];
       setfilterByNumericValues({ ...filterByNumericValues });
-      console.log(OPTIONS_COLUMN);
     }
   };
 
   const resetFilter = () => {
     setPlanetsFilter(data);
+    setfilterByNumericValues({
+      ...filterByNumericValues,
+      value: '0',
+    });
   };
 
   const handleClick = () => {
@@ -60,26 +57,20 @@ function Filters() {
       const newPlanetsFilter = planetsFilter
         .filter((values) => Number(values[columnFilter]) > Number([valueFilter]));
       setPlanetsFilter(newPlanetsFilter);
-      setMsgFilter(filterByNumericValues);
-      console.log(msgFilter);
     }
 
     if (comparisonFilter === 'menor que') {
       const newPlanetsFilter = planetsFilter
         .filter((values) => Number(values[columnFilter]) < Number([valueFilter]));
       setPlanetsFilter(newPlanetsFilter);
-      setMsgFilter(filterByNumericValues);
-      console.log(msgFilter);
     }
 
     if (comparisonFilter === 'igual a') {
       const newPlanetsFilter = planetsFilter
         .filter((values) => Number(values[columnFilter]) === Number([valueFilter]));
       setPlanetsFilter(newPlanetsFilter);
-      setMsgFilter(filterByNumericValues);
-      console.log(msgFilter);
     }
-    removeColumn();
+    removeColumnOptions();
   };
 
   return (
