@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../../context/Context';
-import { PlanetFilter, OptionsFilter, InputStyle, SpanStyle,
-  OptionStyle, SelectStyle, SelectFilter, FormsStyle,
+import { PlanetFilter, OptionsFilter, InputStyle, SpanStyle, H1,
+  OptionStyle, SelectStyle, SelectFilter, FormsStyle, HeaderStyle,
   ButtonStyle, ButtonFilter, LabelStyle } from './style';
 
 const FILTER = 'Filter ';
@@ -24,7 +24,6 @@ function Filters() {
     newOptionsColumn,
     setNewOptionsColumn,
     optionsComparison,
-    // setoptionsComparison,
   } = useContext(StarWarsContext);
 
   const handleClickFilter = () => {
@@ -74,6 +73,9 @@ function Filters() {
 
   return (
     <FormsStyle>
+      <HeaderStyle>
+        <H1>Projeto StarWars Planets</H1>
+      </HeaderStyle>
       <PlanetFilter>
         <LabelStyle htmlFor="planet-input">
           What planet are you looking for ?

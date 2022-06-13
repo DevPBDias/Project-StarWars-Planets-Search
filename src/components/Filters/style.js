@@ -1,14 +1,32 @@
 import styled from 'styled-components';
 
+export const HeaderStyle = styled.header`
+    align-items: center;
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    width: 100%;
+`;
+
+export const H1 = styled.h1`
+    :hover {
+        color: var(--textHover);
+    }
+`;
+
 export const ButtonStyle = styled.button`
     border-radius: 50%;
+    border-color: var(--textColor);
+    background-color: var(--backGroundColor);
+    color: var(--textColor);
     height: 60px;
     margin: 10px;
     padding: 3px;
     text-transform: uppercase;
     width: 60px;
     :hover {
-        border: 2px solid var(--textHover);
+        border: 3px solid var(--textHover);
+        color: var(--textHover);
     }
 `;
 

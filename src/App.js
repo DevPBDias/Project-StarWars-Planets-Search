@@ -1,13 +1,11 @@
 import React from 'react';
-import './App.css';
 import { createGlobalStyle } from 'styled-components';
-import Filters from './components/Filter/Filters';
-import Header from './components/Header/Header';
-import Table from './components/Table/Table';
 import StarWarsProvider from './context/Provider';
+import StarWarsTable from './components/StarwarsTable';
 
 const GlobalStyle = createGlobalStyle`
 :root {
+  --image: 'starwarlogo.jpg';
 
   --backGroundColor: #27282c;
 
@@ -22,6 +20,7 @@ body {
   margin: 0px;
   background-color: var(--backGroundColor);
   color: var(--textColor);
+  box-sizing: border-box;
 }
 `;
 
@@ -29,9 +28,7 @@ function App() {
   return (
     <StarWarsProvider>
       <GlobalStyle />
-      <Header />
-      <Filters />
-      <Table />
+      <StarWarsTable />
     </StarWarsProvider>
   );
 }
