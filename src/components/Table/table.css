@@ -1,0 +1,30 @@
+table {
+  text-transform: capitalize;
+  width: 100%;
+}
+
+th {
+  border: 1px solid;
+  padding: 10px;
+  text-align: center;
+}
+
+td {
+  border: 2px solid;
+  height: 100px;
+  padding: 5px;
+  text-align: center;
+  width: 40px;
+}
+
+tr:hover {
+  color: var(--textHover);
+}
+
+.listFilms {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  width: max-content;
+}
