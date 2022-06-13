@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/Context';
 
+const FILTER = 'Filter ';
+
 function Filters() {
   const {
     data,
@@ -47,10 +49,11 @@ function Filters() {
       setPlanetsFilter(newPlanetsFilter);
     }
 
-    const newOptions = optionsColumn
+    const newOptions = newOptionsColumn
       .filter((options) => column !== options);
     console.log(newOptions);
     setNewOptionsColumn(newOptions);
+    setColumn(newOptions[0]);
     console.log(optionsColumn);
   };
 
@@ -115,7 +118,7 @@ function Filters() {
         type="button"
         onClick={ handleClickFilter }
       >
-        Filter
+        { FILTER }
       </button>
       <button
         type="button"
@@ -128,20 +131,25 @@ function Filters() {
         filterByNumbers.map((filter, index) => (
           <div
             key={ index }
+            data-testid="filter"
+            id="filter"
           >
-            <p>
-              {`${filter.column} 
+            <label htmlFor="filter">
+              { `${FILTER} ${index + 1} : ` }
+              <span>
+                {`${filter.column} 
                 ${filter.comparison} 
                 ${filter.value}`}
-            </p>
-            <button
-              type="button"
-              data-testid="filter"
-              onClick={ () => handleDeleteFilter(index) }
-            >
-              Deletar
-            </button>
+              </span>
+              <button
+                type="button"
+                onClick={ () => handleDeleteFilter(index) }
+              >
+                X
+              </button>
+            </label>
           </div>))
+
       }
     </div>
   );
