@@ -7,50 +7,72 @@ const STAR_WARS_API = 'https://swapi-trybe.herokuapp.com/api/planets/';
 function StarWarsProvider({ children }) {
   const [data, setData] = useState([]);
   const [planetsFilter, setPlanetsFilter] = useState([]);
-  const [filterPlanetName, setfilterPlanetName] = useState({
-    filterByName: {
-      name: '',
-    },
-  });
-  const [filterByNumericValues, setfilterByNumericValues] = useState(
-    {
-      column: 'population',
-      comparison: 'maior que',
-      value: '0',
-    },
-  );
-
-  const apiStarWars = async () => {
-    try {
-      const response = await fetch(STAR_WARS_API);
-      const dataApi = await response.json();
-      const dataInfo = dataApi.results;
-      // deletar uma propriedade de um obj
-      // https://www.w3schools.com/howto/howto_js_remove_property_object.asp
-      const dataInfoDeleted = dataInfo.map((results) => {
-        if (delete results.residents) { return results; }
-        return null;
-      });
-      setData(dataInfoDeleted);
-      // setando o estado inicial abaixo igual ao data, antes de ser feito o filtro
-      setPlanetsFilter(dataInfoDeleted);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [inputValue, setInputValue] = useState('');
+  const [column, setColumn] = useState('population');
+  const [comparison, setComparison] = useState('maior que');
+  const [value, setValue] = useState('0');
+  const [filterByNumbers, setfilterByNumbers] = useState([]);
+  const [newOptionsColumn, setNewOptionsColumn] = useState([]);
+  const [optionsColumn, setOptionsColumn] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water']);
+  const [optionsComparison, setOptionsComparison] = useState([
+    'maior que',
+    'menor que',
+    'igual a']);
 
   // didMount para chamar a API
   useEffect(() => {
+    const apiStarWars = async () => {
+      console.log('chamei Api');
+      try {
+        const response = await fetch(STAR_WARS_API);
+        const dataApi = await response.json();
+        const dataInfo = dataApi.results;
+        const newData = dataInfo.map((results) => {
+          if (delete results.residents) { return results; }
+          return null;
+        });
+        setData(newData);
+        setPlanetsFilter(newData);
+        setNewOptionsColumn(optionsColumn);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     apiStarWars();
   }, []);
 
-  const contextValue = { data,
+  // didMountUpdate: estou criando um filtro dinamico em que ao digitar ele muda o estado do planetas filtrados, anteriormente setado igual ao data
+  useEffect(() => {
+    const planets = data
+      .filter((planet) => planet.name.toLowerCase().includes(inputValue));
+    setPlanetsFilter(planets);
+  }, [inputValue, data]);
+
+  const contextValue = {
+    data,
     planetsFilter,
     setPlanetsFilter,
-    filterPlanetName,
-    setfilterPlanetName,
-    filterByNumericValues,
-    setfilterByNumericValues };
+    inputValue,
+    setInputValue,
+    filterByNumbers,
+    setfilterByNumbers,
+    column,
+    comparison,
+    value,
+    setColumn,
+    setComparison,
+    setValue,
+    optionsColumn,
+    setOptionsColumn,
+    newOptionsColumn,
+    setNewOptionsColumn,
+    optionsComparison,
+    setOptionsComparison };
 
   return (
     <StarWarsContext.Provider value={ contextValue }>
