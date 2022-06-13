@@ -5,8 +5,6 @@ import StarWarsTable from './components/StarwarsTable';
 
 const GlobalStyle = createGlobalStyle`
 :root {
-  --image: 'starwarlogo.jpg';
-
   --backGroundColor: #27282c;
 
   --textHover: yellow;
