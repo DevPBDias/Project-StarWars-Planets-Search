@@ -38,13 +38,16 @@ function StarWarsProvider({ children }) {
         });
         setData(newData);
         setPlanetsFilter(newData);
-        setNewOptionsColumn(optionsColumn);
       } catch (error) {
         console.log(error);
       }
     };
     apiStarWars();
   }, []);
+
+  useEffect(() => {
+    setNewOptionsColumn(optionsColumn);
+  }, [optionsColumn]);
 
   // didMountUpdate: estou criando um filtro dinamico em que ao digitar ele muda o estado do planetas filtrados, anteriormente setado igual ao data
   useEffect(() => {
