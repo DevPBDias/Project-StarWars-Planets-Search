@@ -1,7 +1,7 @@
 ## Project-StarWars-Planets-Search
 
-- Um dos meus primeiros projetos como dev. 
-- A aplicação é um site que apresenta os planetas do sistema solar e missões da Nasa.
+- Projeto do módulo de front-end da Trybe.
+- Desenvolver uma aplicação que cria uma lista com filtros de planetas do universo de Star Wars usando Context API e Hooks para controlar os estados globais.
 - Projeto individual do curso da Trybe.
 
 
