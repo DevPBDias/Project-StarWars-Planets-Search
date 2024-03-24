@@ -1,14 +1,28 @@
-## Project-StarWars-Planets-Search
+# Project-StarWars-Planets-Search
 
-- Projeto do módulo de front-end da Trybe.
-- Desenvolver uma aplicação que cria uma lista com filtros de planetas do universo de Star Wars usando Context API e Hooks para controlar os estados globais.
-- Projeto individual do curso da Trybe.
+**- Projeto Trybe Front-end**
 
+Desenvolver uma aplicação que cria uma lista com filtros de planetas do universo de Star Wars usando Context API e Hooks para controlar os estados globais.
 
-## Tecnologias:
-<div>
-  <img src='https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white'/>
-  <img src='https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white'/>
-  <img src='https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E'/>
-  <img src='https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB'/>
-</div>
+<details><summary>Stack utilizada</summary>
+<ul>
+  <li>Framework: React</li>
+  <li>Linguagem: Javascript</li>
+  <li>Estilização: Css3</li>
+</ul>
+</details>
+
+<details><summary>Funcionalidades</summary>
+<ul>
+   <li>Filtros de pesquisa de planetas</li>
+   <li>Criação de tabelas que listam o que foi pesquisado</li>
+</ul>
+</details>
+
+<details><summary>Aprendizados</summary>
+ <ul>
+  <li>Criar tabelas em HTML;</li>
+  <li>Criar mecanismos de filtragem de dados de uma API</li>
+  <li>Renderizar informações em formato de tabela com base na filtragem</li>
+</ul>
+</details>
